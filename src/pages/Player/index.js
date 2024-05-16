@@ -2,16 +2,23 @@ import Banner from 'components/Banner';
 import styles from './Player.module.css'
 import Titulo from 'components/Titulo';
 import { useParams } from 'react-router-dom';
-import videos from "json/db.json";
 import NaoEncontrada from 'pages/NaoEncontrada';
+import { useEffect, useState } from 'react';
 
 function Player () {
+    const [ video, setVideo ] = useState([]);
     const params = useParams();
-    const player = videos.find((video) => {
-        return video.id === Number(params.id);
-    })
 
-    if(!player) {
+    useEffect(() => {
+      fetch(
+        `https://my-json-server.typicode.com/ThaisRMBatista/cinetag-api/videos?id=${params.id}`
+      ).then(resposta => resposta.json())
+      .then(dados => {
+        setVideo(...dados)
+      })
+    }, [])
+
+    if(!video) {
       return <NaoEncontrada />
     }
 
@@ -25,9 +32,9 @@ function Player () {
           <iframe
             width="100%"
             height="100%"
-            src={player.link}
-            title={player.titulo}
-            frameBorder= '0'
+            src={video.link}
+            title={video.titulo}
+            frameBorder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
           ></iframe>
         </section>
