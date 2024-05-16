@@ -3,12 +3,17 @@ import styles from './Player.module.css'
 import Titulo from 'components/Titulo';
 import { useParams } from 'react-router-dom';
 import videos from "json/db.json";
+import NaoEncontrada from 'pages/NaoEncontrada';
 
 function Player () {
     const params = useParams();
     const player = videos.find((video) => {
         return video.id === Number(params.id);
     })
+
+    if(!player) {
+      return <NaoEncontrada />
+    }
 
     return (
       <>
