@@ -14,5 +14,10 @@ https://github.com/ThaisRMBatista/Cinetag.git
 npm start
 ```
 
+3. Acesso a API fake externamente
+```bash
+https://github.com/ThaisRMBatista/cinetag-api
+```
+
  ## Ter acesso ao produto final 
  https://cinetag-lime.vercel.app/
